@@ -32,7 +32,9 @@ std::vector<std::string> calc::get_tokens(std::string& line) {
     if (line.empty()) return {};
 
     size_t sep = line.find('=');
-    if (sep == std::string::npos) {
+    size_t quot = line.find('"');
+    
+    if (sep == std::string::npos || (quot != std::string::npos && quot < sep)) {
         size_t sp = line.find(' ');
         if (sp == std::string::npos) throw std::runtime_error("Unknown syntax in line '" + line + "'.");
 
